@@ -1,0 +1,41 @@
+[
+  {
+    "role": "standard_user",
+    "password": "secret_sauce",
+    "expected": "success",
+    "description": "Full access — baseline role for happy-path and regression coverage."
+  },
+  {
+    "role": "locked_out_user",
+    "password": "secret_sauce",
+    "expected": "blocked",
+    "errorContains": "locked out",
+    "description": "Access-control negative case — account exists but is denied entry."
+  },
+  {
+    "role": "problem_user",
+    "password": "secret_sauce",
+    "expected": "success",
+    "description": "Authenticates, but UI rendering is intentionally broken downstream — good candidate for visual/regression checks, not just login."
+  },
+  {
+    "role": "performance_glitch_user",
+    "password": "secret_sauce",
+    "expected": "success",
+    "description": "Authenticates with injected latency — useful for timeout/retry-tolerance testing."
+  },
+  {
+    "role": "standard_user",
+    "password": "wrong_password",
+    "expected": "invalid",
+    "errorContains": "do not match",
+    "description": "Invalid-credentials negative case for a real account."
+  },
+  {
+    "role": "not_a_real_user",
+    "password": "secret_sauce",
+    "expected": "invalid",
+    "errorContains": "do not match",
+    "description": "Unknown-account negative case."
+  }
+]
